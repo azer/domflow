@@ -67,3 +67,5 @@ function fooValue(element, context){
   }
 }
 ```
+
+See `test/extension.js` and `test/index.js` for more examples.
