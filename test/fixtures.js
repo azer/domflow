@@ -1,0 +1,4 @@
+exports["list.html"] = "<li foo-text=\"fruit\"></li> <li foo-text=\"fruit\"></li> <li foo-text=\"fruit\"></li> <li foo-text=\"fruit\"></li>"
+exports["scopes.html"] = "<h1 foo-text=\"title\"></h1> <ul class=\"fruits\" foo-iter=\"fruits\"> <li foo-text=\"name\"></li> </ul> <ul class=\"vegetables\" foo-iter=\"vegetables\"> <li foo-text=\"name\"></li> </ul> <h4 foo-text=\"name\"></h4>"
+exports["simple-nested.html"] = "<h1 id=\"h1\" class=\"header\" foo-class=\"cls\" foo-text=\"title\"></h1> <div class=\"content\" foo-class=\"cls\"> <div id=\"c1\" foo-class=\"cls\" foo-text=\"content\"></div> <div id=\"c2\" foo-class=\"cls\" foo-text=\"content\"></div> <div> <h1 id=\"h2\" foo-text=\"title\"></h1> <h1 id=\"h3\" foo-class=\"cls\" foo-text=\"title\"></h1> </div> </div>"
+exports["simple.html"] = "<h1 class=\"header\" foo-class=\"h1-class\" foo-text=\"title\"></h1> <div class=\"content\" foo-class=\"div-class\" foo-text=\"content\"></div>"

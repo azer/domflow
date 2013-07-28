@@ -1,0 +1,26 @@
+{
+  "name": "domflow",
+  "version": "0.0.0",
+  "description": "Tiny Reactive DOM Programming Library",
+  "main": "index.js",
+  "scripts": {
+    "test": "fox"
+  },
+  "devDependencies": {
+    "fox": "*",
+    "jsify": "*",
+    "attr": "*",
+    "attrs": "*"
+  },
+  "keywords": [
+    "reactive",
+    "dom",
+    "dataflow"
+  ],
+  "repository": {
+    "url": "git@github.com:azer\/domflow.git",
+    "type": "git"
+  },
+  "author": "Azer Ko\u00e7ulu <azer@kodfabrik.com>",
+  "license": "BSD"
+}
