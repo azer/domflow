@@ -14,7 +14,7 @@ $ npm install domflow
 ```html
 <div>
   <label foo-text="title"></label>
-  <textarea foo-value="">
+  <textarea foo-value="input">
   </textarea>
 </div>
 ```
