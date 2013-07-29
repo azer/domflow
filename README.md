@@ -3,6 +3,12 @@
 Lightweight Reactive DOM Programming Library. It only provides an API for your own
 data-binding abstractions.
 
+## The Protocol
+
+* Domflow accepts any type, including functions as data.
+* One-way binding will be initialized if given function has `subscribe` method.
+* If given function has `subscribe` and `publish` methods, domflow will initialize a two-way binding.
+
 ## Install
 
 ```bash
@@ -24,8 +30,8 @@ domflow = require('domflow')
 attrs = require('attrs') // you can use any other event/model library instead of attrs
 
 foo = domflow({
-  'foo-text': fooText, // see below for implementation
-  'foo-value': fooValue
+  'foo-text': require('./foo-text'), // see below for implementation
+  'foo-value': require('./foo-value')
 })
 
 foo('div', attrs({
@@ -36,34 +42,29 @@ foo('div', attrs({
 
 ## Example Implementation
 
-`foo-text`
-
+foo-text.js
 ```js
-function fooText(element, context){
-  text = context[ element.getAttribute('foo-text') ]
+exports.update = function(element, update) {
+  element.innerHTML = update;
+}
 
-  element.innerHTML = text
-
-  text.subscribe(function(update){
-    element.innerHTML = update
-  })
+exports.setup = function (element, value) {
+  element.innerHTML = value();
 }
 ```
 
-`foo-value`
+foo-value.js
 
 ```js
-function fooValue(element, context){
-  value = context[ element.getAttribute('foo-text') ]
+exports.update = function (element, update) {
+  element.innerHTML = update;
+}
 
-  element.value = value
+exports.setup = function (element, source) {
+  element.innerHTML = source();
 
-  value.subscribe(function(update){
-    element.innerHTML = update
-  })
-
-  element.onkeyup = function(){
-    value(element.value)
+  element.onchange = function(){
+    source(element.value);
   }
 }
 ```

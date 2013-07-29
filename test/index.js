@@ -1,7 +1,8 @@
-var attrs      = require('attrs'),
-    fixtures   = require('./fixtures'),
+var attr = require('attr'),
+    fixtures = require('./fixtures'),
     extensions = require('./extensions'),
-    newFlow    = require('../');
+    newList = require('new-list'),
+    newFlow = require('../');
 
 function beforeEach(){
   reset('');
@@ -153,10 +154,10 @@ describe('bindings', function(done){
     'foo-iter': extensions['foo-iter']
   });
 
-  it('updates title and content on data updates', function(){
+  it('updates title and content on data updates', function(done){
     reset(fixtures['simple.html']);
 
-    var content = attrs({
+    var content = attr.attrs({
       title: 'hello world',
       content: 'this is the content'
     });
@@ -164,15 +165,33 @@ describe('bindings', function(done){
     flow('body', content);
 
     content.title('lorem ipsum');
-    content.content('sit dolar amet yo');
+    content.content('sit dolar amet');
 
     setTimeout(function(){
       expect(query('h1').innerHTML).to.equal('lorem ipsum');
-      expect(query('content').innerHTML).to.equal('sit dolar amet');
+      expect(query('div').innerHTML).to.equal('sit dolar amet');
       done();
     }, 500);
 
   });
+
+  it('updates the layout on list data change', function(done){
+
+    reset(fixtures['lists.html']);
+
+    var content = {
+      title: attr('hello world'),
+      name: 'Jack London',
+      fruits: newList('cherry', 'apple', 'banana', 'orange'),
+      vegetables: newList('tomato', 'cabbage', 'lettuce')
+    };
+
+    flow('body', content);
+
+    content.fruits.push('watermelon', 'grape');
+
+  });
+
 
 });
 

@@ -10,7 +10,7 @@
     "fox": "*",
     "jsify": "*",
     "attr": "*",
-    "attrs": "*"
+    "new-list": "*"
   },
   "keywords": [
     "reactive",
