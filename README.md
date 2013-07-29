@@ -3,11 +3,32 @@
 Lightweight Reactive DOM Programming Library. It only provides an API for your own
 data-binding abstractions.
 
-## The Protocol
+## The Binding Protocol
 
-* Domflow accepts any type, including functions as data.
-* One-way binding will be initialized if given function has `subscribe` method.
-* If given function has `subscribe` and `publish` methods, domflow will initialize a two-way binding.
+* Domflow expects data as functions.
+* One-way binding will be initialized if given function has `subscribe` method that distributes updates to callbacks. 
+* Two-way binding will be initialized if given function sets its value if first parameter was specified.
+
+Example data:
+
+```js
+> mood()
+'sleepy'
+> mood.subscribe(function(newMood) { console.log('mood =>', newMood) })
+> mood('happy')
+'happy'
+'mood => happy'
+```
+
+## Example Data Structures
+
+* [attr](http://github.com/azer/attr)
+* [new-list](http://github.com/azer/new-list)
+* [new-object](http://github.com/azer/new-object)
+
+## Extensions
+
+see `test/extensions` or below examples
 
 ## Install
 
@@ -44,26 +65,26 @@ foo('div', attrs({
 
 foo-text.js
 ```js
-exports.update = function(element, update) {
-  element.innerHTML = update;
+exports.update = function(binding, update) {
+  binding.element.innerHTML = update; // the update distributed to sub
 }
 
-exports.setup = function (element, value) {
-  element.innerHTML = value();
+exports.setup = function (binding) {
+  binding.innerHTML = source(); // the function that holds the data
 }
 ```
 
 foo-value.js
 
 ```js
-exports.update = function (element, update) {
+exports.update = function (binding, update) {
   element.innerHTML = update;
 }
 
-exports.setup = function (element, source) {
-  element.innerHTML = source();
+exports.setup = function (binding, source) {
+  binding.element.innerHTML = source();
 
-  element.onchange = function(){
+  binding.element.onchange = function(){
     source(element.value);
   }
 }
