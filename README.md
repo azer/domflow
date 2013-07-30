@@ -3,29 +3,6 @@
 Lightweight Reactive DOM Programming Library. It only provides an API for your own
 data-binding abstractions.
 
-## The Binding Protocol
-
-* Domflow expects data as functions.
-* One-way binding will be initialized if given function has `subscribe` method that distributes updates to callbacks. 
-* Two-way binding will be initialized if given function sets its value if first parameter was specified.
-
-Example data:
-
-```js
-> mood()
-'sleepy'
-> mood.subscribe(function(newMood) { console.log('mood =>', newMood) })
-> mood('happy')
-'happy'
-'mood => happy'
-```
-
-## Example Data Structures
-
-* [attr](http://github.com/azer/attr)
-* [new-list](http://github.com/azer/new-list)
-* [new-object](http://github.com/azer/new-object)
-
 ## Extensions
 
 see `test/extensions` or below examples
