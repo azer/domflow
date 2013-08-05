@@ -10,7 +10,10 @@
     "fox": "*",
     "jsify": "*",
     "attr": "*",
-    "new-list": "*"
+    "new-list": "*",
+    "play-audio": "*",
+    "one": "*",
+    "serve": "*"
   },
   "keywords": [
     "reactive",

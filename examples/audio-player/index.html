@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>audio player / domflow examples</title>
+    <style>
+      .player { padding: 20px 0; }
+      input { width: 350px; }
+    </style>
+  </head>
+  <body>
+
+      <label>Type Song URL:</label>
+      <input type="text" data-val="song" />
+
+      <div class="player" data-play="song"></div>
+
+      <em>Now playing: <strong data-text="song"></strong></em>
+
+  </body>
+  <script type="text/javascript" src="build.js"></script>
+</html>
