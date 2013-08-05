@@ -154,7 +154,8 @@ describe('bindings', function(done){
   var flow = newFlow({
     'foo-text': extensions['foo-text'],
     'foo-class': extensions['foo-class'],
-    'foo-iter': extensions['foo-iter']
+    'foo-iter': extensions['foo-iter'],
+    'foo-val': extensions['foo-val']
   });
 
   it('updates title and content on data updates', function(done){
@@ -207,6 +208,30 @@ describe('bindings', function(done){
 
   });
 
+  it('updates the source when input has a new value', function(done){
+    reset(fixtures['input.html']);
+
+    var name = attr('Bruce Lee');
+
+    flow('input', name);
+
+    name.subscribe(function(update, old){
+      expect(update).to.equal('John Smith');
+      expect(old).to.equal('Bruce Lee');
+      done();
+    });
+
+    var element = query('input');
+
+    setTimeout(function(){
+      element.value = 'John Smith';
+
+      var evt = document.createEvent("HTMLEvents");
+      evt.initEvent("change", false, true);
+      element.dispatchEvent(evt);
+    }, 10);
+
+  });
 
 });
 

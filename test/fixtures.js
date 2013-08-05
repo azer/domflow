@@ -1,3 +1,4 @@
+exports["input.html"] = "<input type=\"text\" class=\"input\" foo-val=\".\" />"
 exports["list.html"] = "<li foo-text=\"fruit\"></li> <li foo-text=\"fruit\"></li> <li foo-text=\"fruit\"></li> <li foo-text=\"fruit\"></li>"
 exports["lists.html"] = "<h1 foo-text=\"title\"></h1> <ul class=\"fruits\" foo-iter=\"fruits\"> <li foo-text=\".\"></li> </ul> <ul class=\"vegetables\" foo-iter=\"vegetables\"> <li foo-text=\".\"></li> </ul> <h4 foo-text=\"name\"></h4>"
 exports["scopes.html"] = "<h1 foo-text=\"title\"></h1> <ul class=\"fruits\" foo-iter=\"fruits\"> <li foo-text=\"name\"></li> </ul> <ul class=\"vegetables\" foo-iter=\"vegetables\"> <li foo-text=\"name\"></li> </ul> <h4 foo-text=\"name\"></h4>"
