@@ -27,6 +27,8 @@ describe('initializing scopeless basic layouts', function(){
     expect(query('div').innerHTML).to.equal('this is the content');
   });
 
+
+
   it('shows an array', function(){
     reset(fixtures['list.html']);
 
@@ -46,6 +48,7 @@ describe('initializing scopeless basic layouts', function(){
     });
 
   });
+
 
   it('sets class attributes', function(){
     reset(fixtures['simple.html']);
@@ -170,7 +173,7 @@ describe('bindings', function(done){
     setTimeout(function(){
       expect(query('h1').innerHTML).to.equal('lorem ipsum');
       expect(query('div').innerHTML).to.equal('sit dolar amet');
-      done();
+      done()
     }, 500);
 
   });
@@ -189,6 +192,18 @@ describe('bindings', function(done){
     flow('body', content);
 
     content.fruits.push('watermelon', 'grape');
+
+    setTimeout(function(){
+
+      var target = queryAll('.fruits > *');
+
+      ['cherry', 'apple', 'banana', 'orange', 'watermelon', 'grape'].forEach(function(fruit, ind){
+        expect(target[ind].innerHTML).to.be.equal(fruit);
+      });
+
+      done();
+
+    }, 100);
 
   });
 

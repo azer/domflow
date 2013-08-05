@@ -2,7 +2,15 @@ var domify = require('domify');
 
 exports.block = true;
 
-exports.setup = function(binding, subflow){
+exports.child = function (source, index) {
+  return typeof source == 'function' ? source(index) : source[index];
+};
+
+exports.isIterable = function (source) {
+  return Array.isArray(source) || (typeof source == 'function' && Array.isArray(source()) );
+};
+
+exports.setup = function (binding) {
   var source = typeof binding.source == 'function' ? binding.source() : binding.source,
       html;
 
@@ -10,30 +18,23 @@ exports.setup = function(binding, subflow){
   binding.element.innerHTML = '';
 
   html = copy(binding.template, source.length);
-  subflow(binding.element, html, source);
+  binding.html(html);
+  binding.setup();
 };
 
-exports.update = function(binding, update, subflow){
+exports.subscribe = function (source, fn) {
+  if (source.subscribe) source.subscribe(fn);
+};
 
+exports.update = function (binding, update, bind) {
   var i, el;
   if (update.add) {
     for (i in update.add) {
       el = domify(binding.template);
       binding.element.insertBefore(el, binding.element.children[i]);
+      bind(el, update.add[i]);
     }
   }
-
-  /*if (update.add) {
-    debugger;
-    toAdd = domify(copy(binding.template, update.add.length));
-
-    i = -1;
-    len = toAdd.length;
-
-    while (++i < len) {
-      binding.element.appendChild(toAdd[i]);
-    }
-  }*/
 
   if (update.remove) {
     i = update.remove.length;
