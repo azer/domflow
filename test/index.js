@@ -27,8 +27,6 @@ describe('initializing scopeless basic layouts', function(){
     expect(query('div').innerHTML).to.equal('this is the content');
   });
 
-
-
   it('shows an array', function(){
     reset(fixtures['list.html']);
 
@@ -48,7 +46,6 @@ describe('initializing scopeless basic layouts', function(){
     });
 
   });
-
 
   it('sets class attributes', function(){
     reset(fixtures['simple.html']);
@@ -147,6 +144,35 @@ describe('initialization with scopes', function(){
 
   });
 
+    it('shows two nested arrays', function(){
+    reset(fixtures['list-nested.html']);
+
+    var context = {
+      fruits: [
+        [{ fruit: 'apple' }, { fruit: 'banana' }, { fruit: 'peach' }],
+        [{ fruit: 'watermelon' }, { fruit: 'cherry' }]
+      ]
+    };
+
+    flow('body', context);
+
+    var container = query('.container');
+    var lists = queryAll('.fruits');
+    var fruits1 = queryAll('.fruit', lists[0]),
+        fruits2 = queryAll('.fruit', lists[1]);
+
+    expect(lists.length).to.equal(2);
+
+    fruits1.forEach(function(el, ind){
+      expect(el.innerHTML).to.equal(context.fruits[0][ind].fruit);
+    });
+
+    fruits2.forEach(function(el, ind){
+      expect(el.innerHTML).to.equal(context.fruits[1][ind].fruit);
+    });
+
+  });
+
 });
 
 describe('bindings', function(done){
@@ -239,8 +265,8 @@ function query(selector){
   return document.querySelector(selector);
 }
 
-function queryAll(selector){
-  return Array.prototype.slice.call(document.querySelectorAll(selector));
+function queryAll(selector, el){
+  return Array.prototype.slice.call((el || document).querySelectorAll(selector));
 }
 
 function reset(html){
