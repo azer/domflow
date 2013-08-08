@@ -1,6 +1,6 @@
 {
   "name": "domflow",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Tiny Reactive DOM Programming Library",
   "main": "index.js",
   "scripts": {
